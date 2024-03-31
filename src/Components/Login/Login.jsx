@@ -1,5 +1,5 @@
 
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from "firebase/auth";
 import app from "../../Firebase/firebase.init";
 import { useState } from "react";
 
@@ -23,15 +23,32 @@ const Login = () => {
 
     }
 
+    const handleSignOut =() =>{
+        console.log('sign out')
+        signOut(auth).then(result =>{
+            //dekhi kisu paoa jay kina tai result ta dekhay dilam
+            console.log(result)
+            // thik moto logout hoye gele amra ki korte pari,,at least setUser ke null kore dite pari kono user nai tai
+            setUser(null)
+        }).catch(error =>{
+            console.log(error.message)
+        })
+    }
+
     
     return (
         <div>
-            <button onClick={handleGoogleSignin}>Google Login</button>
+            {/* user thake ? logout dekhaba : na thakle sign in koro */}
+            {
+                user ? 
+                <button onClick={handleSignOut}>Sign Out</button> :
+            <button onClick={handleGoogleSignin}>Google Login</button>}
             {/** conditional rendering: jodi user thake taile dekhaba na thakle dhukte jabe na */}
             {user && <div>
                 <h3>User: {user?.displayName}</h3>
                 <p>Email: {user.email}</p>
                 <img src={user.photoURL} alt="" />
+                <p>UserId: {user.uid}</p>
             </div>}
         </div>
     );

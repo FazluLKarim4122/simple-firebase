@@ -12,5 +12,5 @@
  * 11. import googleauthprovider and create a new provider
  * 12. use signInWithPopUp and pass auth and provider
  * 13. activate signin method from authorized section(google, github, twitter) to avoid error firebase not installed 
- * 14. 
+ * 14. [vite]: change 127.0.0.1 to localhost
  */
