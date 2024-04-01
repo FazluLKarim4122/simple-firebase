@@ -38,16 +38,17 @@ const Login = () => {
     //Github Authentication 
     const githubProvider = new GithubAuthProvider()
     const handleGithubSignIn =() =>{
-        console.log('github sign in')
+        // console.log('github sign in')
+        signInWithPopup(auth, githubProvider)
+        .then(result =>{
+            const loggedUser = result.user
+            console.log(loggedUser)
+            setUser(loggedUser)
+        }).catch(error => {
+            console.log(error.message)
+        })
     }
-    signInWithPopup(auth, githubProvider)
-    .then(result =>{
-        const loggedUser = result.user
-        console.log(loggedUser)
-        setUser(loggedUser)
-    }).catch(error => {
-        console.log(error.message)
-    })
+   
 
     
     return (
